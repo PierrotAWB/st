@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "mono:pixelsize=20:antialias=true:autohint=true";
-static char *font2[] = { "JoyPixels:pixelsize=20:antialias=true:autohint=true" };
+static char *font = "FiraCode:size=22:antialias=true:autohint=true";
+static char *font2[] = { "JoyPixels:size=22:antialias=true:autohint=true" };
 static int borderpx = 2;
 
 /*
@@ -232,8 +232,8 @@ ResourcePref resources[] = {
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-	{ XK_NO_MOD,            Button4, kscrollup,      {.i = 1} },
-	{ XK_NO_MOD,            Button5, kscrolldown,    {.i = 1} },
+	{ XK_NO_MOD,            Button5, kscrollup,      {.i = 1} },
+	{ XK_NO_MOD,            Button4, kscrolldown,    {.i = 1} },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
@@ -243,6 +243,7 @@ static MouseShortcut mshortcuts[] = {
 
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
+#define SUPER Mod4Mask
 #define TERMMOD (Mod1Mask|ShiftMask)
 
 static char *openurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -o", "externalpipe", NULL };
@@ -258,12 +259,12 @@ static Shortcut shortcuts[] = {
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
 	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
 	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+	{ SUPER,                XK_equal,       zoom,           {.f = +1} },
+	{ SUPER,                XK_minus,       zoom,           {.f = -1} },
+	{ SUPER,                XK_c,           clipcopy,       {.i =  0} },
+	{ SUPER,                XK_v,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
-	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
-	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
-	{ Mod4Mask,             XK_c,           clipcopy,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      clippaste,      {.i =  0} },
-	{ Mod4Mask,             XK_v,           clippaste,      {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
