@@ -1886,6 +1886,17 @@ csihandle(void)
 			goto unknown;
 		}
 		break;
+	case '$':
+		if (csiescseq.mode[1] == 'p') /* DECRQM -- Request Mode */
+			return;
+		goto unknown;
+	case '>':
+		/* xterm extended mouse/keyboard reporting */
+		return;
+	case ':':
+		if (csiescseq.arg[0] == 4) /* Set underline style */
+			return;
+		goto unknown;
 	}
 }
 
@@ -1976,6 +1987,9 @@ strhandle(void)
 				 */
 				redraw();
 			}
+			return;
+		case 8: /* Hyperlink */
+		case 11: /* Background color reset */
 			return;
 		}
 		break;
